@@ -9,6 +9,19 @@ import { MyApp } from './app.component';
 import { DataProvider } from '../providers/data/data';
 import { Keyboard } from '@ionic-native/keyboard';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+// Initialize Firebase
+const config = {
+  apiKey: "AIzaSyBjq522CSpYHTzqlrgVv--3jllnY_-ou5g",
+  authDomain: "camperchat-fde7a.firebaseapp.com",
+  databaseURL: "https://camperchat-fde7a.firebaseio.com",
+  projectId: "camperchat-fde7a",
+  storageBucket: "camperchat-fde7a.appspot.com",
+  messagingSenderId: "78943256397"
+};
+
 @NgModule({
   declarations: [
     MyApp,
@@ -16,7 +29,9 @@ import { Keyboard } from '@ionic-native/keyboard';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(config),
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

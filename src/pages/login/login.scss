@@ -7,7 +7,7 @@ page-login {
   }
 
   .login-description {
-    height: 60%;
+    height: 50%;
     line-height: 2em;
   }
 
@@ -19,5 +19,35 @@ page-login {
     -webkit-box-shadow: 0px 6px 20px 0px rgba(0,0,0,0.18);
     -moz-box-shadow: 0px 6px 20px 0px rgba(0,0,0,0.18);
     box-shadow: 0px 6px 20px 0px rgba(0,0,0,0.18);
+  }
+
+  ion-input, ion-textarea {
+    //background-color: rgba(61, 61, 61, 0.21);;
+    //border: 1px solid #cecece;
+    padding-left: 10px;
+  }
+
+  ion-textarea {
+    height: 200px;
+  }
+
+  textarea {
+    height: 180px;
+  }
+
+  button {
+    border: none !important;
+  }
+
+  ion-item:not(.input-has-focus) ion-input.ng-invalid {
+    background-color: rgba(245, 61, 61, 0.21);
+  }
+
+  ion-item {
+    background-color: rgba(158, 158, 158, 0.1) !important;
+  }
+
+  ion-label {
+    color: #42ff76 !important;
   }
 }

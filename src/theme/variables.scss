@@ -59,7 +59,10 @@ $colors: (
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
-
+$text-input-md-show-focus-highlight: false;
+.list-md .item-input:last-child {
+  border-bottom: 0px solid #dedede !important;
+}
 
 
 
