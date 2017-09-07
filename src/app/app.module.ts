@@ -11,6 +11,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AuthServiceProvider } from '../providers/auth-service/auth-service';
 
 // Initialize Firebase
 const config = {
@@ -42,7 +43,8 @@ const config = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DataProvider,
-    Keyboard
+    Keyboard,
+    AuthServiceProvider
   ]
 })
 export class AppModule {}
