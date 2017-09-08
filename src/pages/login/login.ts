@@ -59,7 +59,7 @@ export class LoginPage {
 
         .then( (confirmationResult) => {
 
-          const verificationCode = "sdfsfsaf";
+          const verificationCode = "+8613632690809";
           console.log("prompt msg. Go to confirm.");
           console.log(confirmationResult);
 
