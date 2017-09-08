@@ -11,6 +11,7 @@ import { Keyboard } from '@ionic-native/keyboard';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { WdAuthServiceProvider } from '../providers/wd-auth-service/wd-auth-service';
 
 // Initialize Firebase
 const config = {
@@ -21,6 +22,7 @@ const config = {
   storageBucket: "camperchat-fde7a.appspot.com",
   messagingSenderId: "78943256397"
 };
+
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ const config = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DataProvider,
-    Keyboard
+    Keyboard,
+    WdAuthServiceProvider
   ]
 })
 export class AppModule {}
