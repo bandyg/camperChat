@@ -37,7 +37,7 @@ $colors: (
   primary:    #488aff,
   secondary:  #32db64,
   danger:     #f53d3d,
-  light:      #f4f4f4,
+  light:      #959292,
   dark:       #222
 );
 
@@ -55,14 +55,10 @@ $colors: (
 
 
 
-
 // App Windows Variables
 // --------------------------------------------------
 // Windows only Sass variables can go here
-$text-input-md-show-focus-highlight: false;
-.list-md .item-input:last-child {
-  border-bottom: 0px solid #dedede !important;
-}
+
 
 
 
