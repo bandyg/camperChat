@@ -1,41 +1,67 @@
-<ion-content padding>
 
-  <ion-row>
-    <ion-col>
-      <img src="assets/images/logo.png" />
-    </ion-col>
-  </ion-row>
 
-  <ion-row class="login-description">
-    <ion-col>
-      <p>Camper Chat allows you to talk to other <strong>caravaners, RV'ers, roadtrippers and campers</strong> near you. Use Camper Chat to give and receive tips, ask for help with your flat tyre, or just have a friendly chat.</p>
+  <ion-content scroll="false" overflow-scroll="false" no-bounce>
+    <ion-scroll #content scrollY="true" style="width:100%; height:100%;">
 
-      <p>Log in with <strong>Facebook</strong> below to get started.</p>
+    <ion-grid style="height:100%;">
+      <ion-row>
+        <ion-col>
+          <img src="assets/images/logo.png" />
+        </ion-col>
+      </ion-row>
 
-    </ion-col>
-  </ion-row>
+      <ion-row class="login-description">
+        <ion-col>
+          <p>Camper Chat allows you to talk to other <strong>friends and schoolmates</strong> near you. Use Camper Chat to give and receive/post events, ask for help with your friends, or just have a friendly chat.</p>
 
-  <ion-row>
-    <ion-col>
-      <form [formGroup]="loginForm">
-        <ion-item>
-          <ion-label floating>EMail</ion-label>
-          <ion-input type="email" formControlName="email"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>Password</ion-label>
-          <ion-input type="password" formControlName="password"></ion-input>
-        </ion-item>
-      </form>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-      <button class='login-button' ion-button round block (click)="loginWithEmail()">Login</button>
-    </ion-col>
-    <ion-col>
-      <button class='login-button' ion-button round block (click)="signUp()">Sign up</button>
-    </ion-col>
-  </ion-row>
+          <p>Log in with <strong>your email</strong> below to get started.</p>
 
-</ion-content>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <form [formGroup]="loginForm">
+            <ion-item>
+              <ion-label floating>EMail</ion-label>
+              <ion-input (ionFocus)="onFocus($event)" type="email" formControlName="email"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Password</ion-label>
+              <ion-input (ionFocus)="onFocus($event)" type="password" formControlName="password"></ion-input>
+            </ion-item>
+          </form>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button class='login-button' ion-button round block (click)="loginWithEmail()">Login</button>
+        </ion-col>
+        <ion-col>
+          <button class='login-button' ion-button round block (click)="signUp()">Sign up</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    </ion-scroll>
+  </ion-content>
+
+  <!--ion-content padding>
+    <ion-scroll #scroll scrollY="true" style="width:100%; height:100%; white-space: nowrap;">
+      <div  style="height:100%;">
+        <div style="height:100px;width:100px;border:1px solid black;"></div>
+        <div style="height:100px;width:100px;border:1px solid red;"></div>
+        <div style="height:100px;width:100px;border:1px solid blue;"></div>
+        <div style="height:100px;width:100px;border:1px solid green;"></div>
+        <div style="height:100px;width:100px;border:1px solid grey;"></div>
+        <div style="height:100px;width:100px;border:1px solid brown;"></div>
+        <div style="height:100px;width:100px;border:1px solid yellow;"></div>
+        <div style="height:100px;width:100px;border:1px solid orange;"></div>
+        <div style="height:100px;width:100px;border:1px solid pink;"></div>
+        <div style="height:100px;width:100px;border:1px solid violet;"></div>
+      </div>
+    </ion-scroll>
+
+    <button ion-button text-only>Go to start</button>
+    <button ion-button text-only>Scroll to right!</button>
+  </ion-content-->

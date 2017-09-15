@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, ViewChild, ElementRef} from '@angular/core';
+import {IonicPage, NavController, NavParams, Scroll, Platform} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 //import { AngularFireAuth } from 'angularfire2/auth';
 import { WdAuthServiceProvider } from '../../providers/wd-auth-service/wd-auth-service';
 import { LoadingController, AlertController } from 'ionic-angular';
+import { Keyboard } from '@ionic-native/keyboard';
+
+
 
 
 declare let wilddog;
@@ -20,30 +23,56 @@ declare let wilddog;
   templateUrl: 'login.html',
 })
 export class LoginPage {
+  @ViewChild('content') content: Scroll;
 
   loginForm: FormGroup;
+  currentFocusedEle: any = null;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public formBuilder: FormBuilder,
               public wdAuthServ: WdAuthServiceProvider,
               public alertCtrl: AlertController,
-              public loadingCtrl:LoadingController) {
+              public loadingCtrl:LoadingController,
+              public keyboard:Keyboard,
+              public platform:Platform) {
 
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
     });
+
+/*    this.keyboard.onKeyboardShow().subscribe( (value) => {
+
+      console.log( "focus scroll" );
+      if(this.currentFocusedEle != null) {
+
+        const pos = this.currentFocusedEle.nativeElement.getBoundingClientRect();
+        this.content._scrollContent.nativeElement.scrollTop = pos.top + pos.height * 5;
+        console.log( "focus scroll" );
+      }
+
+    });*/
   }
 
   ionViewDidLoad() {
 
     this.wdAuthServ.authStateMon();
     console.log('ionViewDidLoad LoginPage');
+    document.addEventListener('focus', function(e) { console.log("called");window.scrollTo(0, 0)});
+    window.onresize = (e) =>
+    {
+      //ngZone.run will help to run change detection
+
+        console.log("Width: " + window.innerWidth);
+        console.log("Height: " + window.innerHeight);
+
+    };
   }
 
   signUp() {
-
+    //this.content._scrollContent.nativeElement.scrollTop = this.content._scrollContent.nativeElement.scrollHeight;
+    //this.content.nativeElement.scrollTop
     this.navCtrl.push("SignupPage");
   }
 
@@ -83,6 +112,7 @@ export class LoginPage {
     } else {
 
       this.presentAlert("Information", "Please fill in your valid infromation");
+
     }
 
 
@@ -163,5 +193,40 @@ export class LoginPage {
     loading.present();
 
   }
+
+
+  onFocus(event) {
+    //console.log("on focus"+ JSON.stringify(event));
+    if(this.platform.is('android')) {
+
+      setTimeout(() => {
+
+        let pos = event._elementRef.nativeElement.getBoundingClientRect();
+        //event._elementRef.nativeElement.animate(event._elementRef.nativeElement);
+        //this.scrollTo( this.currentFocusedEle, this.content._scrollContent.nativeElement.scrollHeight, 500);
+        if (pos.top < window.screen.height) {
+
+          this.content._scrollContent.nativeElement.scrollTop = window.screen.height / 2; //this.content._scrollContent.nativeElement.scrollHeight;
+          console.log("scroll to middle screen to show focus ctrl");
+        }
+
+      }, 500);
+    }
+
+  }
+
+  scrollTo(element, to, duration) {
+
+    if (duration <= 0) return;
+    let difference = to - element.scrollTop;
+    let perTick = difference / duration * 10;
+
+    setTimeout( () => {
+      element.scrollTop = element.scrollTop + perTick;
+      if (element.scrollTop === to) return;
+      this.scrollTo(element, to, duration - 10);
+    }, 10);
+  }
+
 
 }

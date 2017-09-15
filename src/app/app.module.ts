@@ -9,19 +9,7 @@ import { MyApp } from './app.component';
 import { DataProvider } from '../providers/data/data';
 import { Keyboard } from '@ionic-native/keyboard';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
 import { WdAuthServiceProvider } from '../providers/wd-auth-service/wd-auth-service';
-
-// Initialize Firebase
-const config = {
-  apiKey: "AIzaSyBjq522CSpYHTzqlrgVv--3jllnY_-ou5g",
-  authDomain: "camperchat-fde7a.firebaseapp.com",
-  databaseURL: "https://camperchat-fde7a.firebaseio.com",
-  projectId: "camperchat-fde7a",
-  storageBucket: "camperchat-fde7a.appspot.com",
-  messagingSenderId: "78943256397"
-};
 
 
 @NgModule({
@@ -31,9 +19,7 @@ const config = {
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot(),
-    AngularFireModule.initializeApp(config),
-    AngularFireAuthModule
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

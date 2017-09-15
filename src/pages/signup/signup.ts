@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {IonicPage, NavController, NavParams, Scroll, Platform} from 'ionic-angular';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { WdAuthServiceProvider } from '../../providers/wd-auth-service/wd-auth-service';
 import { LoadingController, AlertController } from 'ionic-angular';
+import { } from '';
 /**
  * Generated class for the SignupPage page.
  *
@@ -16,6 +17,7 @@ import { LoadingController, AlertController } from 'ionic-angular';
   templateUrl: 'signup.html',
 })
 export class SignupPage {
+  @ViewChild('content') content: Scroll;
 
   public emailSignUpForm: FormGroup;
 
@@ -24,7 +26,8 @@ export class SignupPage {
               private formBuilder: FormBuilder,
               public wdAuthServ: WdAuthServiceProvider,
               public alertCtrl: AlertController,
-              public loadingCtrl:LoadingController) {
+              public loadingCtrl:LoadingController,
+              public platform:Platform) {
 
     this.emailSignUpForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -97,6 +100,26 @@ export class SignupPage {
       buttons: ['Dismiss']
     });
     alert.present();
+  }
+
+  onFocus(event) {
+    //console.log("on focus"+ JSON.stringify(event));
+    if(this.platform.is('android')) {
+
+      setTimeout( () => {
+        let pos = event._elementRef.nativeElement.getBoundingClientRect();
+        //event._elementRef.nativeElement.animate(event._elementRef.nativeElement);
+        //this.scrollTo( this.currentFocusedEle, this.content._scrollContent.nativeElement.scrollHeight, 500);
+        if(pos.top < window.screen.height) {
+
+          this.content._scrollContent.nativeElement.scrollTop = window.screen.height/2; //this.content._scrollContent.nativeElement.scrollHeight;
+          console.log("scroll to middle screen to show focus ctrl");
+        }
+
+      }, 500 );
+    }
+
+
   }
 
 }
