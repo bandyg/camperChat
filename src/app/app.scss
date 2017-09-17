@@ -15,4 +15,61 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+div.scroll-content {
+  padding-bottom: 10px !important;
+}
+
+ion-item:not(.input-has-focus).ng-invalid.ng-touched ion-label {
+  color: rgb(251, 18, 35) !important;
+}
+
+ion-item:not(.input-has-focus).ng-valid.ng-touched ion-label {
+  color: #32db64 !important;
+}
+
+//focus
+.item-md.item-input.item-input-has-focus .item-inner,
+.item-md.item-input.input-has-focus .item-inner {
+  border-bottom-color: #dedede !important;
+  -webkit-box-shadow: inset 0 -1px 0 0 #dedede !important;
+  box-shadow: inset 0 -1px 0 0 rgba(255, 255, 255, 0) !important;
+}
+
+.list-md .item-input.item-input-has-focus:last-child,
+.list-md .item-input.input-has-focus:last-child {
+  border-bottom-color: #dedede !important;
+  -webkit-box-shadow: inset 0 -1px 0 0 #dedede !important;
+  box-shadow: inset 0 -1px 0 0 rgba(255, 255, 255, 0) !important;
+}
+
+.item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+.item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+  border-bottom-color: #dedede !important;
+  -webkit-box-shadow: inset 0 -1px 0 0 #dedede !important;
+  box-shadow: inset 0 -1px 0 0 rgba(255, 255, 255, 0) !important;
+}
+
+.list-md .item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus):last-child,
+.list-md .item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus):last-child {
+  border-bottom-color: #dedede !important;
+  -webkit-box-shadow: inset 0 -1px 0 0 #dedede !important;
+  box-shadow: inset 0 -1px 0 0 rgba(255, 255, 255, 0) !important;
+}
+
+.item-md.item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+  border-bottom-color: #dedede !important;
+  -webkit-box-shadow: inset 0 -1px 0 0 #dedede !important;
+  box-shadow: inset 0 -1px 0 0 rgba(255, 255, 255, 0) !important;
+}
+
+.list-md .item-input.ng-invalid.ng-touched:not(.input-has-focus):not(.item-input-has-focus):last-child {
+  border-bottom-color: #dedede !important;
+  -webkit-box-shadow: inset 0 -1px 0 0 #dedede !important;
+  box-shadow: inset 0 -1px 0 0 rgba(255, 255, 255, 0) !important;
+}
+
+.list-md .item-input:last-child {
+  border-bottom: 0px solid #dedede !important;
+}
+
 

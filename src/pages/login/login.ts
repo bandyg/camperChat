@@ -6,9 +6,6 @@ import { WdAuthServiceProvider } from '../../providers/wd-auth-service/wd-auth-s
 import { LoadingController, AlertController } from 'ionic-angular';
 import { Keyboard } from '@ionic-native/keyboard';
 
-
-
-
 declare let wilddog;
 /**
  * Generated class for the LoginPage page.
@@ -37,37 +34,18 @@ export class LoginPage {
               public keyboard:Keyboard,
               public platform:Platform) {
 
+    //keyboard.disableScroll(true);
     this.loginForm = formBuilder.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.minLength(6), Validators.required])]
     });
 
-/*    this.keyboard.onKeyboardShow().subscribe( (value) => {
-
-      console.log( "focus scroll" );
-      if(this.currentFocusedEle != null) {
-
-        const pos = this.currentFocusedEle.nativeElement.getBoundingClientRect();
-        this.content._scrollContent.nativeElement.scrollTop = pos.top + pos.height * 5;
-        console.log( "focus scroll" );
-      }
-
-    });*/
   }
 
   ionViewDidLoad() {
 
     this.wdAuthServ.authStateMon();
     console.log('ionViewDidLoad LoginPage');
-    document.addEventListener('focus', function(e) { console.log("called");window.scrollTo(0, 0)});
-    window.onresize = (e) =>
-    {
-      //ngZone.run will help to run change detection
-
-        console.log("Width: " + window.innerWidth);
-        console.log("Height: " + window.innerHeight);
-
-    };
   }
 
   signUp() {
