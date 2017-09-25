@@ -25,3 +25,4 @@ $ ionic cordova run ios
 Substitute ios for android if not on a Mac.
 
 //TODO: facebook and inappbrowser not install yet
+//TODO: refactor loading & alert

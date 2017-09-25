@@ -1,9 +1,9 @@
-import {Component, ViewChild} from '@angular/core';
-import {IonicPage, NavController, NavParams, Scroll, Platform} from 'ionic-angular';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { WdAuthServiceProvider } from '../../providers/wd-auth-service/wd-auth-service';
-import { LoadingController, AlertController } from 'ionic-angular';
-import { } from '';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams, Platform} from 'ionic-angular';
+import {Validators, FormBuilder, FormGroup} from '@angular/forms';
+import {WdAuthServiceProvider} from '../../providers/wd-auth-service/wd-auth-service';
+import {ShowMsgProvider} from "../../providers/show-msg/show-msg";
+//import { } from '';
 /**
  * Generated class for the SignupPage page.
  *
@@ -17,16 +17,15 @@ import { } from '';
   templateUrl: 'signup.html',
 })
 export class SignupPage {
-  @ViewChild('content') content: Scroll;
+  //@ViewChild('content') content: Scroll;
 
-  public emailSignUpForm: FormGroup;
+  public emailSignUpForm:FormGroup;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              private formBuilder: FormBuilder,
-              public wdAuthServ: WdAuthServiceProvider,
-              public alertCtrl: AlertController,
-              public loadingCtrl:LoadingController,
+  constructor(public navCtrl:NavController,
+              public navParams:NavParams,
+              formBuilder:FormBuilder,
+              public wdAuthServ:WdAuthServiceProvider,
+              private showMsg:ShowMsgProvider,
               public platform:Platform) {
 
     this.emailSignUpForm = formBuilder.group({
@@ -50,26 +49,34 @@ export class SignupPage {
 
     if (this.emailSignUpForm.valid) {
 
-      let loading = this.loadCustom();
+      let loading = this.showMsg.loadCustom();
 
       loading.present().then(() => {
 
         let formControls:any = this.emailSignUpForm.controls;
 
         this.wdAuthServ.signupWithEmail(formControls.email.value,
-          formControls.password.value).then( (user) => {
+          formControls.password.value).then((user) => {
 
           console.info('create user success.', user);
-          if(this.wdAuthServ.currentUser.emailVerified == false) {
+          if (this.wdAuthServ.currentUser.emailVerified == false) {
 
             this.wdAuthServ.sendEmailVerification();
             console.log("verification email sent");
-            this.presentAlert('A verification email sends to your address:', user.email);
+            this.wdAuthServ.currentUser.updateProfile({displayName: formControls.name.value, photoURL: null});
+            this.wdAuthServ.currentUser.updatePhone(formControls.phoneNum.value, (error) => {
+
+              console.log(error);
+            });
+            this.showMsg.presentAlert('A verification email sends to your address:', user.email, () => {
+
+              this.closePage();
+            });
           }
 
-        }).catch( (err) => {
+        }).catch((err) => {
 
-          this.presentAlert('Account Create Failed', err.message);
+          this.showMsg.presentAlert('Account Create Failed', err.message);
           console.info("create user failed.", err);
         });
         console.log(formControls.email.value);
@@ -79,47 +86,24 @@ export class SignupPage {
     }
   }
 
-  loadCustom() {
+  /*  onFocus(event) {
+   //console.log("on focus"+ JSON.stringify(event));
+   if(this.platform.is('android')) {
 
-    let loading = this.loadingCtrl.create({
-      spinner:"dots",// apinner既是loading框上的图标
-      // content:`<div class="custom-spinner-container">
-      // <div class="custom-spinner-box"></div>
-      // </div>`,
-      duration:5000 // loading框持续的时间，默认在触发DidDismiss之后关闭，除非设置了该属性
-    });
+   setTimeout( () => {
+   let pos = event._elementRef.nativeElement.getBoundingClientRect();
+   //event._elementRef.nativeElement.animate(event._elementRef.nativeElement);
+   //this.scrollTo( this.currentFocusedEle, this.content._scrollContent.nativeElement.scrollHeight, 500);
+   if(pos.top < window.screen.height) {
 
-    return loading;
-  }
+   this.content._scrollContent.nativeElement.scrollTop = window.screen.height/2; //this.content._scrollContent.nativeElement.scrollHeight;
+   console.log("scroll to middle screen to show focus ctrl");
+   }
 
-  presentAlert(title: string, subTitle: string) {
-
-    let alert = this.alertCtrl.create({
-      title: title,
-      subTitle: subTitle,
-      buttons: ['Dismiss']
-    });
-    alert.present();
-  }
-
-  onFocus(event) {
-    //console.log("on focus"+ JSON.stringify(event));
-    if(this.platform.is('android')) {
-
-      setTimeout( () => {
-        let pos = event._elementRef.nativeElement.getBoundingClientRect();
-        //event._elementRef.nativeElement.animate(event._elementRef.nativeElement);
-        //this.scrollTo( this.currentFocusedEle, this.content._scrollContent.nativeElement.scrollHeight, 500);
-        if(pos.top < window.screen.height) {
-
-          this.content._scrollContent.nativeElement.scrollTop = window.screen.height/2; //this.content._scrollContent.nativeElement.scrollHeight;
-          console.log("scroll to middle screen to show focus ctrl");
-        }
-
-      }, 500 );
-    }
+   }, 500 );
+   }
 
 
-  }
+   }*/
 
 }

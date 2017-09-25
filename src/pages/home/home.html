@@ -9,11 +9,11 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="home" #chat id="chat">
+<ion-content #chat id="chat">
 
-  <ion-list no-lines>
+  <ion-list no-lines [virtualScroll]="messages" approxItemHeight="50px">
 
-    <ion-item *ngFor="let message of messages">
+    <ion-item *virtualItem='let message'>
       <ion-avatar item-left class="animate-in-primary">
         <img [src]="message.picture">
       </ion-avatar>
@@ -22,14 +22,26 @@
         <p>{{message.message}}</p>
       </div>
     </ion-item>
+  </ion-list>
+
+  <ion-list>
 
   </ion-list>
 
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar>
-    <ion-input [(ngModel)]="chatMessage" type="text" placeholder="enter message..."></ion-input>
-    <button ion-button icon-only (click)="sendMessage()" style="position:absolute; right: 0; top: 0; margin: 0;"><ion-icon name="chatbubbles"></ion-icon></button>
+
+<ion-footer [keyboardAttach]="chat" no-border>
+  <ion-toolbar position="bottom">
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col text-wrap col-10="">
+          <ion-input [(ngModel)]="chatMessage" type="text" [placeholder]="placeholder"></ion-input>
+        </ion-col>
+        <ion-col col-2="">
+          <button ion-button icon-only (click)="sendMessage()" style="justify-content: center;position:absolute; right: 0; top: 0; margin: 0;"><ion-icon name="chatbubbles"></ion-icon></button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
 </ion-footer>

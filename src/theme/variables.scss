@@ -67,6 +67,110 @@ $colors: (
 // then be future customized. This import comes last
 // so that the above variables are used and Ionic's
 // default are overridden.
+//3D menu
+/*.gradient-bg {
+  background: #204f5f !important;
+  background: -moz-radial-gradient(right, ellipse cover,  #204f5f 0%, #091b31 100%) !important;
+  background: -webkit-radial-gradient(right, ellipse cover,  #204f5f 0%,#091b31 100%) !important;
+  background: radial-gradient(ellipse at right,  #204f5f 0%,#091b31 100%) !important;
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#204f5f', endColorstr='#091b31',GradientType=1 ) !important;
+}
+.tparent {
+  background-color: transparent !important;
+  .toolbar-background-ios {
+    border-color: transparent !important;
+    background: transparent !important;
+  }
+}
+
+.imgBackground {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.iconBackground {
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+// colors
+.white {
+  color: #fff !important;
+}
+
+.font18 {
+  font-size: 18px;
+  font-size: get-vw(18px);
+}
+
+
+ion-nav{
+  transition: all .75s cubic-bezier(.78,.37,.62,.86)!important;
+}
+
+.ion-page {
+  transition: all .40s cubic-bezier(.78,.37,.62,.86) !important;
+  transform: scale3d(1, 1, 1) rotateY(0) translateX(0) !important;
+}
+
+
+.show-menu + ion-nav{
+  perspective: 320px;
+  .ion-page {
+    transform: scale3d(0.9, 0.9, 0.9) rotateY(-12deg) translateX(-50px) !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    overflow: hidden !important;
+    ion-content {
+      overflow: hidden !important;
+    }
+  }
+}
+
+.nav-decor {
+  @extend .tparent;
+}
+
+.ios {
+  .menu-content-reveal {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0) !important;
+  }
+}
+.menu-inner {
+  @extend .tparent;
+  ion-content {
+    @extend .tparent;
+  }
+}
+
+ion-app.ios {
+  @extend .gradient-bg;
+}
+
+.menu-user-image {
+  @extend .imgBackground;
+  height:  get-vw(60px);
+  width:  get-vw(60px);
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+ion-avatar {
+  position: relative;
+  ion-badge {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    padding: 3px 5px;
+    min-height: 22px;
+    min-width: 22px;
+    border: 2px solid #fff;
+  }
+}*/
+
+.input-cover {
+  position: static;
+}
 
 @import "ionic.theme.default";
 
